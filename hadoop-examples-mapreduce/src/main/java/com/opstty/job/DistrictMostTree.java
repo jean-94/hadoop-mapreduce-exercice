@@ -2,8 +2,10 @@ package com.opstty.job;
 
 import com.opstty.AgeDistrictWritable;
 import com.opstty.mapper.DistrictMostTreeMapper;
+import com.opstty.mapper.DistrictMostTreeMapper2;
 import com.opstty.mapper.DistrictOldestTreeMapper;
 import com.opstty.reducer.DistrictMostTreeReducer;
+import com.opstty.reducer.DistrictMostTreeReducer2;
 import com.opstty.reducer.DistrictOldestTreeReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -26,22 +28,33 @@ public class DistrictMostTree {
             System.exit(2);
         }
 
-        Job job = Job.getInstance(conf, "districtoldesttree");
+        Job job = Job.getInstance(conf, "districtmosttrees");
         job.setJarByClass(DistrictMostTree.class);
         job.setMapperClass(DistrictMostTreeMapper.class);
         job.setCombinerClass(DistrictMostTreeReducer.class);
         job.setReducerClass(DistrictMostTreeReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-
-
-
         for (int i = 0; i < otherArgs.length - 1; ++i) {
             FileInputFormat.addInputPath(job, new Path(otherArgs[i]));
         }
         FileOutputFormat.setOutputPath(job,
                 new Path(otherArgs[otherArgs.length - 1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.waitForCompletion(true);
+
+        Job job2 = Job.getInstance(conf, "districtmosttrees2");
+        job2.setJarByClass(DistrictMostTree.class);
+        job2.setMapperClass(DistrictMostTreeMapper2.class);
+        job2.setCombinerClass(DistrictMostTreeReducer2.class);
+        job2.setReducerClass(DistrictMostTreeReducer2.class);
+        job2.setOutputKeyClass(Text.class);
+        job2.setOutputValueClass(IntWritable.class);
+        for (int i = 0; i < otherArgs.length - 1; ++i) {
+            FileInputFormat.addInputPath(job2, new Path(otherArgs[i]));
+        }
+        FileOutputFormat.setOutputPath(job2,
+                new Path(otherArgs[otherArgs.length - 1]));
+        System.exit(job2.waitForCompletion(true) ? 0 : 1);
     }
 
 }
