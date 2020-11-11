@@ -42,13 +42,13 @@ public class DistrictMostTree {
                 new Path(otherArgs[otherArgs.length - 1]));
         job.waitForCompletion(true);
 
-        Job job2 = Job.getInstance(conf, "districtmosttrees2");
+        Configuration conf2 = new Configuration();
+        Job job2 = Job.getInstance(conf2, "districtmosttrees2");
         job2.setJarByClass(DistrictMostTree.class);
         job2.setMapperClass(DistrictMostTreeMapper2.class);
-        job2.setCombinerClass(DistrictMostTreeReducer2.class);
         job2.setReducerClass(DistrictMostTreeReducer2.class);
         job2.setOutputKeyClass(Text.class);
-        job2.setOutputValueClass(IntWritable.class);
+        job2.setOutputValueClass(Text.class);
         for (int i = 0; i < otherArgs.length - 1; ++i) {
             FileInputFormat.addInputPath(job2, new Path(otherArgs[i]));
         }
