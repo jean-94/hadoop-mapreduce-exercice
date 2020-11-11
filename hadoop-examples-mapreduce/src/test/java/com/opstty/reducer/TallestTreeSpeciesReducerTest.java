@@ -15,14 +15,14 @@ import java.util.Arrays;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SortHeightReducerTest {
+public class TallestTreeSpeciesReducerTest {
     @Mock
     private Reducer.Context context;
-    private SortHeightReducer SortHeightReducer;
+    private TallestTreeSpeciesReducer TallestTreeSpeciesReducer;
 
     @Before
     public void setup() {
-        this.SortHeightReducer = new SortHeightReducer();
+        this.TallestTreeSpeciesReducer = new TallestTreeSpeciesReducer();
     }
 
     @Test
@@ -32,9 +32,7 @@ public class SortHeightReducerTest {
         DoubleWritable value2 = new DoubleWritable(2.0);
         DoubleWritable value3 = new DoubleWritable(2.1);
         Iterable<DoubleWritable> values = Arrays.asList(value1, value3, value2);
-        this.SortHeightReducer.reduce(new Text(key), values, this.context);
-        verify(this.context).write(new Text(""), value1);
-        verify(this.context).write(new Text(""), value2);
-        verify(this.context).write(new Text(""), value3);
+        this.TallestTreeSpeciesReducer.reduce(new Text("key"), values, this.context);
+        verify(this.context).write(new Text("key"), value3);
     }
 }
