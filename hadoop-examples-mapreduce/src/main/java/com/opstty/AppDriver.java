@@ -27,6 +27,9 @@ public class AppDriver {
             programDriver.addClass("sortheight", SortHeight.class,
                     "a map/reduce program that the trees height from smallest to largest.");
 
+            programDriver.addClass("districtoldesttree", DistrictOldestTree.class,
+                    " a map/reduce program that display the district where the oldest tree is.");
+
             exitCode = programDriver.run(argv);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
