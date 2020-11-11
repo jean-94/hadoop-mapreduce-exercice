@@ -14,11 +14,10 @@ public class DistrictOldestTreeReducer extends Reducer<Text, AgeDistrictWritable
             throws IOException, InterruptedException {
 
         for (AgeDistrictWritable val : values) {
-            context.write(key,val);
-            /*
-            if(val.getAge() > result.getAge()) {
+            if(val.getAge().get() > result.getAge().get()) {
                 result = val;
-            }*/
+            }
         }
+        context.write(key, result);
     }
 }

@@ -1,5 +1,6 @@
 package com.opstty;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Writable;
 
 import java.io.DataInput;
@@ -7,48 +8,41 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class AgeDistrictWritable implements Writable {
-    private int district, age;
+    private IntWritable district, age;
 
     public AgeDistrictWritable(){
-        this.district = 0;
-        this.age = 0;
     }
 
-    public AgeDistrictWritable(int age, int district) {
-        this.district = district;
-        this.age = age;
-    }
-
-    public int getAge() {
+    public IntWritable getAge() {
         return age;
     }
 
-    public int getDistrict() {
+    public IntWritable getDistrict() {
         return district;
     }
 
-    public void setAge(int age) {
+    public void setAge(IntWritable age) {
         this.age = age;
     }
 
-    public void setDistrict(int district) {
+    public void setDistrict(IntWritable district) {
         this.district = district;
     }
 
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-        dataOutput.writeInt(age);
-        dataOutput.writeInt(district);
+        age.write(dataOutput);
+        district.write(dataOutput);
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-        dataInput.readInt();
-        dataInput.readInt();
+        age.readFields(dataInput);
+        district.readFields(dataInput);
     }
 
     @Override
     public String toString() {
-        return this.district + " " + this.age;
+        return district.toString() + " " + age.toString();
     }
 }
