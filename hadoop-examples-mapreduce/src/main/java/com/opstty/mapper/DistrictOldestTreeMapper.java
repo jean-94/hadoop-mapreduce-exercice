@@ -18,8 +18,9 @@ public class DistrictOldestTreeMapper extends Mapper<Object, Text, Text, AgeDist
         if (!first) {
             String[] itr = value.toString().split(";");
             if(!itr[5].isEmpty()) {
-                ageDistrictValue.setDistrict(new IntWritable(Integer.parseInt(itr[1])));
-                ageDistrictValue.setAge(new IntWritable(actual_year - Integer.parseInt(itr[5])));
+                ageDistrictValue.setDistrict(Integer.parseInt(itr[1]));
+                ageDistrictValue.setAge(actual_year - Integer.parseInt(itr[5]));
+                System.out.println(ageDistrictValue);
                 context.write(word, ageDistrictValue);
             }
         } else {

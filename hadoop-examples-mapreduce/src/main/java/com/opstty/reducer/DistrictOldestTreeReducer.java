@@ -14,7 +14,7 @@ public class DistrictOldestTreeReducer extends Reducer<Text, AgeDistrictWritable
             throws IOException, InterruptedException {
 
         for (AgeDistrictWritable val : values) {
-            if(val.getAge().get() > result.getAge().get()) {
+            if(val.getAge() > result.getAge()) {
                 result = val;
             }
         }
