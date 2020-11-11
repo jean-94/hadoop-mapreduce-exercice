@@ -36,11 +36,12 @@ public class AgeDistrictWritable implements Writable {
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-        dataInput.readInt();
+        this.age = dataInput.readInt();
+        this.district = dataInput.readInt();
     }
 
     @Override
     public String toString() {
-        return this.district + " " + this.age;
+        return Integer.toString(this.district);
     }
 }
