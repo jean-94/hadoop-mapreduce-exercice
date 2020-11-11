@@ -42,6 +42,6 @@ public class AgeDistrictWritable implements Writable {
 
     @Override
     public String toString() {
-        return Integer.toString(this.district);
+        return Integer.toString(this.district) + " " + (this.age);
     }
 }

@@ -21,6 +21,6 @@ public class DistrictOldestTreeReducer extends Reducer<Text, AgeDistrictWritable
                 result_district = val.getDistrict();
             }
         }
-        context.write(key, result_district);
+        context.write(key, new IntWritable(result_district));
     }
 }

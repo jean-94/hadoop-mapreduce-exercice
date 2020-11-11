@@ -26,7 +26,7 @@ public class DistrictOldestTree {
         Job job = Job.getInstance(conf, "districtoldesttree");
         job.setJarByClass(DistrictOldestTree.class);
         job.setMapperClass(DistrictOldestTreeMapper.class);
-        job.setCombinerClass(DistrictOldestTreeReducer.class);
+        //job.setCombinerClass(DistrictOldestTreeReducer.class);
         job.setReducerClass(DistrictOldestTreeReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(AgeDistrictWritable.class);
