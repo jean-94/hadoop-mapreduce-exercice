@@ -38,8 +38,9 @@ public class DistrictMostTree {
         for (int i = 0; i < otherArgs.length - 1; ++i) {
             FileInputFormat.addInputPath(job, new Path(otherArgs[i]));
         }
-        FileOutputFormat.setOutputPath(job,
-                new Path(otherArgs[otherArgs.length - 1]));
+        Path outputpath = new Path("Temp");
+        FileOutputFormat.setOutputPath(job,outputpath);
+        outputpath.getFileSystem(conf).delete(outputpath);
         job.waitForCompletion(true);
 
         Configuration conf2 = new Configuration();
@@ -49,11 +50,9 @@ public class DistrictMostTree {
         job2.setReducerClass(DistrictMostTreeReducer2.class);
         job2.setOutputKeyClass(Text.class);
         job2.setOutputValueClass(Text.class);
-        for (int i = 0; i < otherArgs.length - 1; ++i) {
-            FileInputFormat.addInputPath(job2, new Path(otherArgs[i]));
-        }
-        FileOutputFormat.setOutputPath(job2,
-                new Path(otherArgs[otherArgs.length - 1]));
+
+        FileInputFormat.addInputPath(job2, outputpath);
+        FileOutputFormat.setOutputPath(job2, new Path(otherArgs[otherArgs.length - 1]));
         System.exit(job2.waitForCompletion(true) ? 0 : 1);
     }
 
