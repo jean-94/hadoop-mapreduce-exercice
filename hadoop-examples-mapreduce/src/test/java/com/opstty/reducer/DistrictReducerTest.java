@@ -30,9 +30,8 @@ public class DistrictReducerTest {
     public void testReduce() throws IOException, InterruptedException {
         String key = "key";
         NullWritable none = NullWritable.get();
-        IntWritable value = new IntWritable(1);
-        Iterable<IntWritable> values = Arrays.asList(value, value, value);
-        this.DistrictReducer.reduce(new Text(key), values, this.context);
+        Iterable<NullWritable> values = Arrays.asList(none, none, none);
+        this.DistrictReducer.reduce(new Text(key), values , this.context);
         verify(this.context).write(new Text(key), none);
     }
 }
