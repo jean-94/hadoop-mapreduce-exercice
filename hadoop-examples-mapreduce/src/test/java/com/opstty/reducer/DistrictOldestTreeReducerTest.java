@@ -31,7 +31,6 @@ public class DistrictOldestTreeReducerTest {
     @Test
     public void testReduce() throws IOException, InterruptedException {
         String key = "key";
-        NullWritable none = NullWritable.get();
         AgeDistrictWritable ageDistrictWritable1 = new AgeDistrictWritable();
         ageDistrictWritable1.setDistrict(7);
         ageDistrictWritable1.setAge(85);
